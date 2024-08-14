@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import pl.jacpio.entities.Player;
 import pl.jacpio.utiles.Constants;
 import pl.jacpio.utiles.MapOperations;
 
@@ -28,8 +29,8 @@ public class GameScreen implements Screen {
     private World world;
     private Box2DDebugRenderer debugRenderer;
 
-    //Temp player
-    private Body player;
+    //Player
+    private Player player;
     public GameScreen(SpriteBatch batch) {
         this.batch = batch;
 
@@ -46,19 +47,9 @@ public class GameScreen implements Screen {
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, 0), true);
         MapOperations.prepareMap(map, world);
-
-        createPlayer();
+        player = new Player(world, batch);
     }
 
-    private void createPlayer() {
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(400, 400);
-        player = world.createBody(bodyDef);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10,10);
-        player.createFixture(shape, 0.0f);
-    }
 
     @Override
     public void render(float deltaTime) {
@@ -70,10 +61,10 @@ public class GameScreen implements Screen {
         renderer.render();
 
         debugRenderer.render(world, camera.combined);
-//        batch.setProjectionMatrix(camera.combined);
-//        batch.begin();
-//        //Render images etc.
-//        batch.end();
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        player.render(deltaTime);
+        batch.end();
 
     }
 
@@ -84,27 +75,10 @@ public class GameScreen implements Screen {
 
         world.step(deltaTime, 6, 2);
 
-        camera.position.x = player.getPosition().x;
-        camera.position.y = player.getPosition().y;
-        input(deltaTime);
-    }
+        camera.position.x = player.body.getPosition().x;
+        camera.position.y = player.body.getPosition().y;
 
-    private void input(float deltaTime) {
-        float velocityX = 0;
-        float velocityY = 0;
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            velocityY = 10000;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            velocityY = -10000;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-            velocityX = 10000;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
-            velocityX = -10000;
-        }
-        player.setLinearVelocity(velocityX * deltaTime * 2, velocityY * deltaTime* 2);
+        player.update(deltaTime);
     }
 
     @Override
