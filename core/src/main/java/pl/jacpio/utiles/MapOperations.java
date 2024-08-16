@@ -48,7 +48,7 @@ public class MapOperations {
                         } else if (mapObject instanceof EllipseMapObject) {
                             EllipseMapObject ellipseMapObject = (EllipseMapObject) mapObject;
                             Ellipse ellipse = ellipseMapObject.getEllipse();
-                            if (ellipse.width == ellipse.height) continue;
+                            if (ellipse.width != ellipse.height) continue;
                             BodyDef bodyDef = createBodyDef(x * tileSize + tileSize/2f + ellipse.x, y * tileSize + tileSize/2f + ellipse.y);
                             Body body = world.createBody(bodyDef);
                             CircleShape shape = new CircleShape();

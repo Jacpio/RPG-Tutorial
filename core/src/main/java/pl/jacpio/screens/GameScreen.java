@@ -15,6 +15,10 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import pl.jacpio.entities.Player;
+import pl.jacpio.items.Apple;
+import pl.jacpio.items.Item;
+import pl.jacpio.items.Sword;
+import pl.jacpio.listeners.CollisionListener;
 import pl.jacpio.utiles.Constants;
 import pl.jacpio.utiles.MapOperations;
 
@@ -29,12 +33,15 @@ public class GameScreen implements Screen {
     private World world;
     private Box2DDebugRenderer debugRenderer;
 
+    private ContactListener contactListener;
     //Player
     private Player player;
     public GameScreen(SpriteBatch batch) {
         this.batch = batch;
 
     }
+
+    Item item;
 
     @Override
     public void show() {
@@ -46,8 +53,11 @@ public class GameScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, 0), true);
+        contactListener = new CollisionListener();
+        world.setContactListener(contactListener);
         MapOperations.prepareMap(map, world);
         player = new Player(world, batch);
+        item = new Apple(400,550,batch, world);
     }
 
 
@@ -64,6 +74,7 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         player.render(deltaTime);
+        item.render();
         batch.end();
 
     }

@@ -36,7 +36,7 @@ public class Player extends Entity {
             velocityX = -10000;
             direction = Direction.LEFT;
         }
-        if (velocityX != 0 || velocityY != 0){
+        if (velocityX != 0 && velocityY != 0){
             velocityX/= (float) Math.sqrt(2);
             velocityY/= (float) Math.sqrt(2);
         }

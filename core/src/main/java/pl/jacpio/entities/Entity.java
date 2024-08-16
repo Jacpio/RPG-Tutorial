@@ -53,6 +53,7 @@ public class Entity {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width/2, height/2);
         body.createFixture(shape, 0.0f);
+        body.setUserData(this);
         shape.dispose();
     }
     public void update(float delta){}
