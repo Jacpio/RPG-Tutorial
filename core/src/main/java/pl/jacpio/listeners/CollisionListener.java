@@ -15,11 +15,11 @@ public class CollisionListener implements ContactListener {
         if (objectA != null && objectB != null) {
             if (objectA instanceof Player) {
                 if (objectB instanceof Item) {
-                    ((Item) objectB).use();
+                    ((Item) objectB).pickUp();
                 }
             }else {
                 if (objectA instanceof Item) {
-                    ((Item) objectA).use();
+                    ((Item) objectA).pickUp();
                 }
             }
         }

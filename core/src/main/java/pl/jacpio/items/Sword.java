@@ -16,7 +16,7 @@ public class Sword extends Item{
     }
 
     @Override
-    public void use() {
+    public void pickUp() {
         System.out.println("Sword can be picked up!");
     }
 }

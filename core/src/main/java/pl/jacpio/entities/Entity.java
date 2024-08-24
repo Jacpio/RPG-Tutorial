@@ -8,11 +8,14 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import pl.jacpio.entities.components.Inventory;
 
 public class Entity {
     private final World world;
     private final SpriteBatch batch;
     private float elapsedTime = 0;
+
+    public Inventory inventory;
 
     public float width = 32, height = 32;
 
@@ -29,9 +32,10 @@ public class Entity {
         this.batch = batch;
         standImage = new TextureRegion[4];
         runAnimation = new Animation[4];
+
+        inventory = new Inventory(this);
     }
-    public final void setAnimation(String path, int size){
-        Texture texture = new Texture(path);
+    public final void setAnimation(Texture texture, int size){
         TextureRegion[][] region = TextureRegion.split(texture, size, size);
         for (int row = 0; row < 4; row++) {
             standImage[row] = region[row][0];

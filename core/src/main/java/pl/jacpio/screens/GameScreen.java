@@ -15,10 +15,12 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import pl.jacpio.entities.Player;
+import pl.jacpio.huds.InventoryHUD;
 import pl.jacpio.items.Apple;
 import pl.jacpio.items.Item;
 import pl.jacpio.items.Sword;
 import pl.jacpio.listeners.CollisionListener;
+import pl.jacpio.utiles.Assets;
 import pl.jacpio.utiles.Constants;
 import pl.jacpio.utiles.MapOperations;
 
@@ -43,10 +45,19 @@ public class GameScreen implements Screen {
 
     Item item;
 
+    private InventoryHUD inventoryHUD;
+
     @Override
     public void show() {
         camera = new OrthographicCamera();
         viewport = new FitViewport(Gdx.graphics.getWidth()/ Constants.scale, Gdx.graphics.getHeight()/ Constants.scale, camera);
+
+        Assets.load();
+
+        while (!Assets.manager.update()){
+            System.out.println(Assets.manager.getProgress() * 100 + "%");
+        }
+
 
         // Initialize Map
         map = new TmxMapLoader().load("maps/map.tmx");
@@ -58,6 +69,9 @@ public class GameScreen implements Screen {
         MapOperations.prepareMap(map, world);
         player = new Player(world, batch);
         item = new Apple(400,550,batch, world);
+
+        inventoryHUD = new InventoryHUD(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch, player);
+        Gdx.input.setInputProcessor(inventoryHUD);
     }
 
 
@@ -77,6 +91,7 @@ public class GameScreen implements Screen {
         item.render();
         batch.end();
 
+        inventoryHUD.draw();
     }
 
     private void update(float deltaTime) {
@@ -90,11 +105,14 @@ public class GameScreen implements Screen {
         camera.position.y = player.body.getPosition().y;
 
         player.update(deltaTime);
+
+        inventoryHUD.act();
     }
 
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
+        inventoryHUD.getViewport().update(width, height, true);
     }
 
     @Override
@@ -109,7 +127,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-
+        Assets.dispose();
+        map.dispose();
+        debugRenderer.dispose();
     }
 
     @Override

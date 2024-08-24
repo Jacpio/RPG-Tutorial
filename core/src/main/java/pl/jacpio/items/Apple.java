@@ -15,7 +15,7 @@ public class Apple extends Item{
     }
 
     @Override
-    public void use() {
+    public void pickUp() {
         System.out.println("Apple can be picked up!");
     }
 }
