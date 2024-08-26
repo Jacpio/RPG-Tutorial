@@ -1,21 +1,20 @@
 package pl.jacpio.items;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import pl.jacpio.entities.Entity;
 
-public class Sword extends Item{
-    public Sword(float x, float y, SpriteBatch batch, World world, int index) {
+public class RubinSword extends Item{
+    public RubinSword(float x, float y, SpriteBatch batch, World world, int index) {
         super(x,y,0.5f,batch, world, ItemType.SWORD, index);
-        setImage(0);
+        setImage(3);
         setCollision();
-        name = "Miecz";
+        name = "Miecz Rubinowy";
     }
-    public Sword(SpriteBatch batch, World world) {
+    public RubinSword(SpriteBatch batch, World world) {
         super(batch, world, ItemType.SWORD);
-        setImage(0);
-        name = "Miecz";
+        setImage(3);
+        name = "Miecz Rubinowy";
     }
 
     @Override

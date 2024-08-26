@@ -4,19 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
-import pl.jacpio.items.Apple;
-import pl.jacpio.items.Sword;
+import pl.jacpio.items.*;
 import pl.jacpio.utiles.Assets;
 
 public class Player extends Entity {
     public Player(World world, SpriteBatch batch) {
         super(world, batch);
-        createBody(400, 550, 32, 32);
+        createBody(400, 580, 32, 32);
         setAnimation(Assets.loadTexture(Assets.player), 32);
         for (int i = 0; i < 100; i++) {
             inventory.add(new Apple(batch, world));
             inventory.add(new Sword(batch, world));
         }
+        inventory.add(new RubinSword(batch, world));
+        inventory.add(new IronArmor(batch, world));
+        inventory.add(new Bow(batch, world));
     }
 
     @Override

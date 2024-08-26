@@ -11,6 +11,8 @@ public class Assets {
 
     public static final String inventory = "inventory/inventory.png";
     public static final String cell = "inventory/cell.png";
+    public static final String cellActive = "inventory/cellActive.png";
+
     public static Texture loadTexture(String path) {
         return manager.get(path, Texture.class);
     }
@@ -20,6 +22,7 @@ public class Assets {
         manager.load(player, Texture.class);
         manager.load(inventory, Texture.class);
         manager.load(cell, Texture.class);
+        manager.load(cellActive, Texture.class);
     }
     public static void dispose(){
         manager.dispose();

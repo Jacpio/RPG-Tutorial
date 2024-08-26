@@ -42,4 +42,16 @@ public class Inventory {
     public int getSize(){
         return inventory.size();
     }
+
+    public int getBowSlot() {
+        return inventory.indexOf(owner.bow);
+    }
+
+    public int getSwordSlot() {
+        return inventory.indexOf(owner.sword);
+    }
+
+    public int getArmorSlot() {
+        return inventory.indexOf(owner.armor);
+    }
 }

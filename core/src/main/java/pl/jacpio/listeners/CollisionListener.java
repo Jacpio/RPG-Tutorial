@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import pl.jacpio.entities.Entity;
 import pl.jacpio.entities.Player;
 import pl.jacpio.items.Item;
 
@@ -15,11 +16,11 @@ public class CollisionListener implements ContactListener {
         if (objectA != null && objectB != null) {
             if (objectA instanceof Player) {
                 if (objectB instanceof Item) {
-                    ((Item) objectB).pickUp();
+                    ((Item) objectB).pickUp((Entity) objectA);
                 }
             }else {
                 if (objectA instanceof Item) {
-                    ((Item) objectA).pickUp();
+                    ((Item) objectA).pickUp((Entity) objectB);
                 }
             }
         }

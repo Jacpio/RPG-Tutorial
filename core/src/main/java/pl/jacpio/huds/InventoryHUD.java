@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import pl.jacpio.entities.Entity;
 import pl.jacpio.entities.components.Inventory;
 import pl.jacpio.items.Item;
+import pl.jacpio.listeners.CellLister;
 import pl.jacpio.utiles.Assets;
 
 public class InventoryHUD extends Stage {
@@ -25,6 +26,7 @@ public class InventoryHUD extends Stage {
     Table itemTable;
 
     private TextureRegionDrawable cellBackground;
+    private TextureRegionDrawable cellActiveBackground;
 
     public InventoryHUD(Viewport viewport, Batch batch, Entity entity) {
         super(viewport, batch);
@@ -32,6 +34,7 @@ public class InventoryHUD extends Stage {
         this.inventory = entity.inventory;
 
         cellBackground = new TextureRegionDrawable(new TextureRegion(Assets.loadTexture(Assets.cell)));
+        cellActiveBackground = new TextureRegionDrawable(new TextureRegion(Assets.loadTexture(Assets.cellActive)));
 
         Image inventoryBackground = new Image(Assets.loadTexture(Assets.inventory));
         inventoryBackground.setPosition(Gdx.graphics.getWidth() - inventoryBackground.getWidth() - 25, (Gdx.graphics.getHeight() - inventoryBackground.getHeight()) / 2f);
@@ -53,10 +56,19 @@ public class InventoryHUD extends Stage {
 
     public void setTable() {
         itemTable.clear();
+        int armorIndex = inventory.getArmorSlot();
+        int swordIndex = inventory.getSwordSlot();
+        int bowIndex = inventory.getBowSlot();
         for (int i = 0; i < inventory.getSize(); i++) {
             Item item = inventory.get(i);
             Table cellTable = new Table();
-            cellTable.background(cellBackground);
+
+            if (armorIndex == i || swordIndex == i || bowIndex == i) {
+                cellTable.setBackground(cellActiveBackground);
+            }else{
+                cellTable.background(cellBackground);
+            }
+
             Image image = new Image(item.image);
             cellTable.add(image).width(cellSize - 5).height(cellSize - 5);
 
@@ -68,6 +80,7 @@ public class InventoryHUD extends Stage {
             stack.add(cellTable);
             stack.add(itemCount);
 
+            stack.addListener(new CellLister(item, entity));
             itemTable.add(stack).width(cellSize).height(cellSize).padRight(cellOffset).padBottom(cellOffset);
 
             if ((i + 1) % col == 0) {

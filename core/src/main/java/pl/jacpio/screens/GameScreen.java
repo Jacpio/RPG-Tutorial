@@ -22,7 +22,11 @@ import pl.jacpio.items.Sword;
 import pl.jacpio.listeners.CollisionListener;
 import pl.jacpio.utiles.Assets;
 import pl.jacpio.utiles.Constants;
+import pl.jacpio.utiles.ItemsSetter;
 import pl.jacpio.utiles.MapOperations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen implements Screen {
     private SpriteBatch batch;
@@ -38,14 +42,23 @@ public class GameScreen implements Screen {
     private ContactListener contactListener;
     //Player
     private Player player;
+    private boolean inventoryActive = false;
+
     public GameScreen(SpriteBatch batch) {
         this.batch = batch;
 
     }
 
-    Item item;
+    private static List<Body> bodyToRemove = new ArrayList<>();
 
-    private InventoryHUD inventoryHUD;
+
+    public static InventoryHUD inventoryHUD;
+
+    public static ItemsSetter itemsSetter;
+
+    public static void addBodyToRemove(Body body) {
+        bodyToRemove.add(body);
+    }
 
     @Override
     public void show() {
@@ -68,10 +81,13 @@ public class GameScreen implements Screen {
         world.setContactListener(contactListener);
         MapOperations.prepareMap(map, world);
         player = new Player(world, batch);
-        item = new Apple(400,550,batch, world);
+
+        itemsSetter = new ItemsSetter(batch, world);
+        itemsSetter.setItems();
 
         inventoryHUD = new InventoryHUD(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch, player);
-        Gdx.input.setInputProcessor(inventoryHUD);
+
+
     }
 
 
@@ -88,10 +104,10 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         player.render(deltaTime);
-        item.render();
+        itemsSetter.render();
         batch.end();
 
-        inventoryHUD.draw();
+        if (inventoryActive) inventoryHUD.draw();
     }
 
     private void update(float deltaTime) {
@@ -104,9 +120,24 @@ public class GameScreen implements Screen {
         camera.position.x = player.body.getPosition().x;
         camera.position.y = player.body.getPosition().y;
 
-        player.update(deltaTime);
+        if (!world.isLocked()){
+            for (Body body : bodyToRemove){
+                world.destroyBody(body);
+            }
+            bodyToRemove.clear();
+        }
 
-        inventoryHUD.act();
+        player.update(deltaTime);
+        if (inventoryActive) inventoryHUD.act();
+
+        input();
+    }
+
+    private void input() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
+            inventoryActive = !inventoryActive;
+            if (inventoryActive) Gdx.input.setInputProcessor(inventoryHUD);
+        }
     }
 
     @Override
