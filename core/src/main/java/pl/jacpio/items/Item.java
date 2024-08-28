@@ -91,7 +91,7 @@ public class Item {
         int x = id - y * Constants.itemImageCol;
         y *= Constants.itemSize;
         x *= Constants.itemSize;
-        image = new TextureRegion(Assets.loadTexture(Assets.allItems), x, y, Constants.itemSize, Constants.itemSize);
+        image = new TextureRegion(Assets.getTexture(Assets.allItems), x, y, Constants.itemSize, Constants.itemSize);
     }
 
     public final void render() {

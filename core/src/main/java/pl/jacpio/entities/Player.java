@@ -11,7 +11,7 @@ public class Player extends Entity {
     public Player(World world, SpriteBatch batch) {
         super(world, batch);
         createBody(400, 580, 32, 32);
-        setAnimation(Assets.loadTexture(Assets.player), 32);
+        setAnimation(Assets.getTexture(Assets.player), 32);
         for (int i = 0; i < 100; i++) {
             inventory.add(new Apple(batch, world));
             inventory.add(new Sword(batch, world));
