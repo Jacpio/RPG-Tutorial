@@ -10,7 +10,9 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import pl.jacpio.entities.components.Inventory;
 import pl.jacpio.items.Item;
-import pl.jacpio.items.Sword;
+import pl.jacpio.items.basic.Armor;
+import pl.jacpio.items.basic.Bow;
+import pl.jacpio.items.basic.Sword;
 
 public class Entity {
     private final World world;
@@ -28,13 +30,13 @@ public class Entity {
 
     public Animation<TextureRegion>[] runAnimation;
 
-    public Item sword = null;
-    public Item armor = null;
-    public Item bow = null;
+    public Sword sword = null;
+    public Armor armor = null;
+    public Bow bow = null;
 
     //Statistic
-    int life = 80;
-    int maxLife = 100;
+    float life = 80;
+    float maxLife = 100;
 
     public Entity(World world, SpriteBatch batch) {
         this.world = world;
@@ -97,7 +99,7 @@ public class Entity {
         batch.draw(standImage[i], body.getPosition().x - width/2, body.getPosition().y - height/2, width, height);
     }
 
-    public boolean addLife(int amount) {
+    public boolean addLife(float amount) {
         life += amount;
         if (life > maxLife){
             life = maxLife;

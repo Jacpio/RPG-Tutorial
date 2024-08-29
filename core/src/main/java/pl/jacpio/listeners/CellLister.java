@@ -39,16 +39,15 @@ public class CellLister extends InputListener {
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         if (button == Input.Buttons.LEFT) {
             if (!item.isConsume()){
-                System.out.println(item.isUse(entity));
-                if (item.isUse(entity)){
-                    item.unUse(entity);
+                if (entity.inventory.isUse(item)){
+                    entity.inventory.unUse(item);
                 }else item.use(entity);
             }else{
                 item.use(entity);
             }
             GameScreen.inventoryHUD.setTable();
         } else if (button == Input.Buttons.RIGHT) {
-            item.drop(entity);
+            entity.inventory.drop(item);
         }
 
         return true;

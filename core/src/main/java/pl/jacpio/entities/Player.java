@@ -13,12 +13,12 @@ public class Player extends Entity {
         createBody(400, 580, 32, 32);
         setAnimation(Assets.getTexture(Assets.player), 32);
         for (int i = 0; i < 100; i++) {
-            inventory.add(new Apple(batch, world));
-            inventory.add(new Sword(batch, world));
+            inventory.add(new Apple());
+            inventory.add(new IronSword());
         }
-        inventory.add(new RubinSword(batch, world));
-        inventory.add(new IronArmor(batch, world));
-        inventory.add(new Bow(batch, world));
+        inventory.add(new RubinSword());
+        inventory.add(new IronArmor());
+        inventory.add(new WoodenBow());
     }
 
     @Override

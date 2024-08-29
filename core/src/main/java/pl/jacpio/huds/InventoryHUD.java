@@ -84,7 +84,6 @@ public class InventoryHUD extends Stage {
         addActor(itemImage);
 
 
-        setDebugAll(true);
     }
 
     public void setTable() {
