@@ -1,9 +1,13 @@
-package pl.jacpio.utiles;
+package pl.jacpio.utilities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import pl.jacpio.items.Apple;
 import pl.jacpio.items.Item;
+import pl.jacpio.items.LittleHealPotion;
+import pl.jacpio.items.LittleManaPotion;
+import pl.jacpio.items.basic.HealPotion;
+import pl.jacpio.items.basic.ManaPotion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,8 @@ public class ItemsSetter {
     }
     public void setItems() {
         items.add(new Apple(400,550,batch, world));
+        items.add(new LittleManaPotion(450,550,batch, world));
+        items.add(new LittleHealPotion(480,550,batch, world));
     }
     public void render() {
         for (Item item : items) {

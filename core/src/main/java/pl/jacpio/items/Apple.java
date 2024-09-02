@@ -9,9 +9,13 @@ public class Apple extends Eats {
     public static final int ID = 1;
     public Apple(float x, float y, SpriteBatch batch, World world) {
         super(x, y, 0.3f, batch, world, ID);
+        name = "Jabłko";
+        description = "Zdrowe, pożywne i czerwone";
     }
 
     public Apple() {
         super(ID);
+        name = "Jabłko";
+        description = "Zdrowe, pożywne i czerwone";
     }
 }

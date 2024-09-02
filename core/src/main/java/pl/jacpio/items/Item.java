@@ -10,8 +10,8 @@ import pl.jacpio.entities.Entity;
 import pl.jacpio.items.basic.Eats;
 import pl.jacpio.items.basic.HealPotion;
 import pl.jacpio.screens.GameScreen;
-import pl.jacpio.utiles.Assets;
-import pl.jacpio.utiles.Constants;
+import pl.jacpio.utilities.Assets;
+import pl.jacpio.utilities.Constants;
 
 public class Item {
     public final int id;

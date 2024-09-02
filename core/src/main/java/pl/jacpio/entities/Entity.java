@@ -13,10 +13,12 @@ import pl.jacpio.items.Item;
 import pl.jacpio.items.basic.Armor;
 import pl.jacpio.items.basic.Bow;
 import pl.jacpio.items.basic.Sword;
+import pl.jacpio.screens.GameScreen;
 
 public class Entity {
     private final World world;
     private final SpriteBatch batch;
+
     private float elapsedTime = 0;
 
     public Inventory inventory;
@@ -35,8 +37,22 @@ public class Entity {
     public Bow bow = null;
 
     //Statistic
-    float life = 80;
-    float maxLife = 100;
+    public float life = 80;
+    public float maxLife = 100;
+    public float mana = 50;
+    public float maxMana = 100;
+
+    public int dexterity = 0;
+    public int strength = 0;
+    public int magicSkills = 0;
+
+    public float meleeCriticalHitChance = 0.02f;
+    public float rangedCriticalHitChance = 0.02f;
+
+    public int fireDefense = 0;
+    public int meleeDefense = 0;
+    public int rangedDefense = 0;
+    public int magicDefense = 0;
 
     public Entity(World world, SpriteBatch batch) {
         this.world = world;
@@ -103,8 +119,21 @@ public class Entity {
         life += amount;
         if (life > maxLife){
             life = maxLife;
+            GameScreen.playerHUD.lifeBar.setValue(life);
             return false;
         }
+        GameScreen.playerHUD.lifeBar.setValue(life);
+        return true;
+    }
+
+    public boolean addMana(float amount) {
+        mana += amount;
+        if (mana > maxMana){
+            mana = maxMana;
+            GameScreen.playerHUD.manaBar.setValue(mana);
+            return false;
+        }
+        GameScreen.playerHUD.manaBar.setValue(mana);
         return true;
     }
 }

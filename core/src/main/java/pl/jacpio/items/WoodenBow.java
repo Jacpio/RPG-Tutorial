@@ -9,9 +9,13 @@ public class WoodenBow extends Bow {
     public static final int ID = 2;
     public WoodenBow(float x, float y, SpriteBatch batch, World world) {
         super(x, y, batch, world, ID);
+        name = "Drewniany Łuk";
+        description = "Łuk na polowania";
     }
 
     public WoodenBow() {
         super(ID);
+        name = "Drewniany Łuk";
+        description = "Łuk na polowania";
     }
 }

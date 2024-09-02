@@ -1,4 +1,4 @@
-package pl.jacpio.utiles;
+package pl.jacpio.utilities;
 
 public class Constants {
     public static final float scale = 3;

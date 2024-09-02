@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import pl.jacpio.items.*;
-import pl.jacpio.utiles.Assets;
+import pl.jacpio.utilities.Assets;
 
 public class Player extends Entity {
     public Player(World world, SpriteBatch batch) {

@@ -16,11 +16,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import pl.jacpio.entities.Player;
 import pl.jacpio.huds.InventoryHUD;
+import pl.jacpio.huds.PlayerHUD;
 import pl.jacpio.listeners.CollisionListener;
-import pl.jacpio.utiles.Assets;
-import pl.jacpio.utiles.Constants;
-import pl.jacpio.utiles.ItemsSetter;
-import pl.jacpio.utiles.MapOperations;
+import pl.jacpio.utilities.Assets;
+import pl.jacpio.utilities.Constants;
+import pl.jacpio.utilities.ItemsSetter;
+import pl.jacpio.utilities.MapOperations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class GameScreen implements Screen {
 
 
     public static InventoryHUD inventoryHUD;
+    public static PlayerHUD playerHUD;
 
     public static ItemsSetter itemsSetter;
 
@@ -82,8 +84,9 @@ public class GameScreen implements Screen {
         itemsSetter = new ItemsSetter(batch, world);
         itemsSetter.setItems();
 
-        inventoryHUD = new InventoryHUD(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch, player);
-
+        FitViewport hudViewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        inventoryHUD = new InventoryHUD(hudViewport, batch, player);
+        playerHUD = new PlayerHUD(hudViewport, batch, player);
 
     }
 
@@ -103,6 +106,8 @@ public class GameScreen implements Screen {
         player.render(deltaTime);
         itemsSetter.render();
         batch.end();
+
+        playerHUD.draw();
 
         if (inventoryActive) inventoryHUD.draw();
     }
@@ -126,7 +131,7 @@ public class GameScreen implements Screen {
 
         player.update(deltaTime);
         if (inventoryActive) inventoryHUD.act();
-
+        playerHUD.act();
         input();
     }
 
@@ -141,6 +146,7 @@ public class GameScreen implements Screen {
     public void resize(int width, int height) {
         viewport.update(width, height, true);
         inventoryHUD.getViewport().update(width, height, true);
+        playerHUD.getViewport().update(width, height, true);
     }
 
     @Override
@@ -158,6 +164,8 @@ public class GameScreen implements Screen {
         Assets.dispose();
         map.dispose();
         debugRenderer.dispose();
+        inventoryHUD.dispose();
+        playerHUD.dispose();
     }
 
     @Override

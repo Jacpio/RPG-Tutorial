@@ -13,7 +13,7 @@ import pl.jacpio.entities.Entity;
 import pl.jacpio.entities.components.Inventory;
 import pl.jacpio.items.Item;
 import pl.jacpio.listeners.CellLister;
-import pl.jacpio.utiles.Assets;
+import pl.jacpio.utilities.Assets;
 
 public class InventoryHUD extends Stage {
     private final Entity entity;

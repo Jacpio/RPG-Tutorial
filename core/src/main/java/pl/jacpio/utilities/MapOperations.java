@@ -1,4 +1,4 @@
-package pl.jacpio.utiles;
+package pl.jacpio.utilities;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
-import static pl.jacpio.utiles.Constants.tileSize;
+import static pl.jacpio.utilities.Constants.tileSize;
 
 public class MapOperations {
     public static void prepareMap(TiledMap map, World world) {
