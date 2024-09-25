@@ -10,8 +10,8 @@ import pl.jacpio.utilities.Assets;
 public class Player extends Entity {
     public Player(World world, SpriteBatch batch) {
         super(world, batch);
-        createBody(400, 580, 32, 32);
-        setAnimation(Assets.getTexture(Assets.player), 32);
+        createBody(400, 580, 14, 32);
+        setAnimation(Assets.getTexture(Assets.PLAYER), 32);
         for (int i = 0; i < 100; i++) {
             inventory.add(new Apple());
             inventory.add(new IronSword());

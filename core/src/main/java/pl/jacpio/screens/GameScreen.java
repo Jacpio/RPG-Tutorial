@@ -20,7 +20,7 @@ import pl.jacpio.huds.PlayerHUD;
 import pl.jacpio.listeners.CollisionListener;
 import pl.jacpio.utilities.Assets;
 import pl.jacpio.utilities.Constants;
-import pl.jacpio.utilities.ItemsSetter;
+import pl.jacpio.utilities.AssetsSetter;
 import pl.jacpio.utilities.MapOperations;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
     public static InventoryHUD inventoryHUD;
     public static PlayerHUD playerHUD;
 
-    public static ItemsSetter itemsSetter;
+    public static AssetsSetter assetsSetter;
 
     public static void addBodyToRemove(Body body) {
         bodyToRemove.add(body);
@@ -62,12 +62,12 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         camera = new OrthographicCamera();
-        viewport = new FitViewport(Gdx.graphics.getWidth()/ Constants.scale, Gdx.graphics.getHeight()/ Constants.scale, camera);
+        viewport = new FitViewport(Gdx.graphics.getWidth()/ Constants.SCALE, Gdx.graphics.getHeight()/ Constants.SCALE, camera);
 
         Assets.load();
 
-        while (!Assets.manager.update()){
-            System.out.println(Assets.manager.getProgress() * 100 + "%");
+        while (!Assets.MANAGER.update()){
+            System.out.println(Assets.MANAGER.getProgress() * 100 + "%");
         }
 
 
@@ -81,8 +81,9 @@ public class GameScreen implements Screen {
         MapOperations.prepareMap(map, world);
         player = new Player(world, batch);
 
-        itemsSetter = new ItemsSetter(batch, world);
-        itemsSetter.setItems();
+        assetsSetter = new AssetsSetter(batch, world);
+        assetsSetter.setItems();
+        assetsSetter.setNpcs();
 
         FitViewport hudViewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         inventoryHUD = new InventoryHUD(hudViewport, batch, player);
@@ -104,7 +105,7 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         player.render(deltaTime);
-        itemsSetter.render();
+        assetsSetter.render(deltaTime);
         batch.end();
 
         playerHUD.draw();
@@ -128,7 +129,7 @@ public class GameScreen implements Screen {
             }
             bodyToRemove.clear();
         }
-
+        assetsSetter.update(deltaTime);
         player.update(deltaTime);
         if (inventoryActive) inventoryHUD.act();
         playerHUD.act();

@@ -37,6 +37,8 @@ public class Entity {
     public Bow bow = null;
 
     //Statistic
+    public String name;
+
     public float life = 80;
     public float maxLife = 100;
     public float mana = 50;
@@ -84,6 +86,7 @@ public class Entity {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width/2, height/2);
         body.createFixture(shape, 0.0f);
+        body.setLinearDamping(10f);
         body.setUserData(this);
         shape.dispose();
     }

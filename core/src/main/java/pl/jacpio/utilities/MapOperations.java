@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
-import static pl.jacpio.utilities.Constants.tileSize;
+import static pl.jacpio.utilities.Constants.TILE_SIZE;
 
 public class MapOperations {
     public static void prepareMap(TiledMap map, World world) {
@@ -29,8 +29,8 @@ public class MapOperations {
                         if (mapObject instanceof RectangleMapObject) {
                             RectangleMapObject rectangleMapObject = (RectangleMapObject) mapObject;
                             Rectangle rectangle = rectangleMapObject.getRectangle();
-                            BodyDef bodyDef = createBodyDef(x * tileSize + tileSize/2f + rectangle.getX() - (tileSize - rectangle.getWidth())/2f,
-                                y * tileSize + tileSize/2f + rectangle.getY() - (tileSize - rectangle.getHeight())/2f);
+                            BodyDef bodyDef = createBodyDef(x * TILE_SIZE + TILE_SIZE /2f + rectangle.getX() - (TILE_SIZE - rectangle.getWidth())/2f,
+                                y * TILE_SIZE + TILE_SIZE /2f + rectangle.getY() - (TILE_SIZE - rectangle.getHeight())/2f);
                             Body body = world.createBody(bodyDef);
                             PolygonShape shape = new PolygonShape();
                             shape.setAsBox(rectangle.getWidth()/2f, rectangle.getHeight()/2f);
@@ -39,7 +39,7 @@ public class MapOperations {
                         }else if (mapObject instanceof PolygonMapObject) {
                             PolygonMapObject polygonMapObject = (PolygonMapObject) mapObject;
                             Polygon polygon = polygonMapObject.getPolygon();
-                            BodyDef bodyDef = createBodyDef(x * tileSize + polygon.getX(), y * tileSize + polygon.getY());
+                            BodyDef bodyDef = createBodyDef(x * TILE_SIZE + polygon.getX(), y * TILE_SIZE + polygon.getY());
                             Body body = world.createBody(bodyDef);
                             PolygonShape shape = new PolygonShape();
                             shape.set(polygon.getVertices());
@@ -49,7 +49,7 @@ public class MapOperations {
                             EllipseMapObject ellipseMapObject = (EllipseMapObject) mapObject;
                             Ellipse ellipse = ellipseMapObject.getEllipse();
                             if (ellipse.width != ellipse.height) continue;
-                            BodyDef bodyDef = createBodyDef(x * tileSize + tileSize/2f + ellipse.x, y * tileSize + tileSize/2f + ellipse.y);
+                            BodyDef bodyDef = createBodyDef(x * TILE_SIZE + TILE_SIZE /2f + ellipse.x, y * TILE_SIZE + TILE_SIZE /2f + ellipse.y);
                             Body body = world.createBody(bodyDef);
                             CircleShape shape = new CircleShape();
                             shape.setRadius(ellipse.width/2f);

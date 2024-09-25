@@ -116,7 +116,7 @@ public class Inventory {
             amount = inventory.get(inventory.indexOf(item)).amount;
             removeAll(item);
         }else remove(item);
-        GameScreen.itemsSetter.addItem(item, x,y, amount);
+        GameScreen.assetsSetter.addItem(item, x,y, amount);
         GameScreen.inventoryHUD.setTable();
     }
 

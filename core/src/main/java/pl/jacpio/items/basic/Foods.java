@@ -5,12 +5,12 @@ import com.badlogic.gdx.physics.box2d.World;
 import pl.jacpio.entities.Entity;
 import pl.jacpio.items.Item;
 
-public class Eats extends Item {
+public class Foods extends Item {
     public float lifeAmount = 0;
-    public Eats(float x, float y, float scale, SpriteBatch batch, World world, int id) {
+    public Foods(float x, float y, float scale, SpriteBatch batch, World world, int id) {
         super(x,y,scale,batch, world, id);
     }
-    public Eats(int id) {
+    public Foods(int id) {
         super(id);
     }
 

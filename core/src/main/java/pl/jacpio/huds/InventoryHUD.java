@@ -38,10 +38,10 @@ public class InventoryHUD extends Stage {
         this.entity = entity;
         this.inventory = entity.inventory;
 
-        cellBackground = new TextureRegionDrawable(new TextureRegion(Assets.getTexture(Assets.cell)));
-        cellActiveBackground = new TextureRegionDrawable(new TextureRegion(Assets.getTexture(Assets.cellActive)));
+        cellBackground = new TextureRegionDrawable(new TextureRegion(Assets.getTexture(Assets.CELL)));
+        cellActiveBackground = new TextureRegionDrawable(new TextureRegion(Assets.getTexture(Assets.CELL_ACTIVE)));
 
-        Image inventoryBackground = new Image(Assets.getTexture(Assets.inventory));
+        Image inventoryBackground = new Image(Assets.getTexture(Assets.INVENTORY_BACKGROUND));
         inventoryBackground.setPosition(Gdx.graphics.getWidth() - inventoryBackground.getWidth() - 25, (Gdx.graphics.getHeight() - inventoryBackground.getHeight()) / 2f);
 
         addActor(inventoryBackground);
@@ -58,23 +58,23 @@ public class InventoryHUD extends Stage {
         scrollInventory.setSize(inventoryBackground.getWidth() - tableOffset * 2, inventoryBackground.getHeight() - tableOffset * 2);
         addActor(scrollInventory);
 
-        Image itemDescription = new Image(Assets.getTexture(Assets.itemDescription));
+        Image itemDescription = new Image(Assets.getTexture(Assets.ITEM_DESCRIPTION_BACKGROUND));
         itemDescription.setPosition(25,25);
         addActor(itemDescription);
 
-        name = new Label("Name", new Label.LabelStyle(Assets.getFont(Assets.mainFont), Color.WHITE));
+        name = new Label("Name", new Label.LabelStyle(Assets.getFont(Assets.MAIN_FONT), Color.WHITE));
         name.setSize(itemDescription.getWidth() - cornerOffset * 2, itemDescription.getHeight()/5);
         name.setPosition(itemDescription.getX() + cornerOffset,itemDescription.getY() - cornerOffset + itemDescription.getHeight() - name.getHeight());
         addActor(name);
 
-        description = new Label("Description", new Label.LabelStyle(Assets.getFont(Assets.mainFont), Color.WHITE));
+        description = new Label("Description", new Label.LabelStyle(Assets.getFont(Assets.MAIN_FONT), Color.WHITE));
         description.setSize(itemDescription.getWidth() - cornerOffset * 2, itemDescription.getHeight() - cornerOffset * 2 - name.getHeight());
         description.setPosition(itemDescription.getX() + cornerOffset,itemDescription.getY() + cornerOffset);
         description.setAlignment(Align.topLeft);
         description.setFontScale(0.6f);
         addActor(description);
 
-        Image itemPreview = new Image(Assets.getTexture(Assets.itemPreview));
+        Image itemPreview = new Image(Assets.getTexture(Assets.ITEM_PREVIEW_BACKGROUND));
         itemPreview.setPosition(25 + itemDescription.getWidth()/2f - itemPreview.getWidth()/2f, Gdx.graphics.getHeight()/2f);
         addActor(itemPreview);
 
@@ -104,7 +104,7 @@ public class InventoryHUD extends Stage {
             Image image = new Image(item.image);
             cellTable.add(image).width(cellSize - 5).height(cellSize - 5);
 
-            Label itemCount = new Label(item.amount + "", new Label.LabelStyle(Assets.getFont(Assets.mainFont), Color.WHITE));
+            Label itemCount = new Label(item.amount + "", new Label.LabelStyle(Assets.getFont(Assets.MAIN_FONT), Color.WHITE));
             itemCount.setFontScale(0.5f);
             itemCount.setAlignment(Align.bottomRight);
 

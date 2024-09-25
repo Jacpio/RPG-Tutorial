@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import pl.jacpio.entities.Entity;
-import pl.jacpio.items.basic.Eats;
+import pl.jacpio.items.basic.Foods;
 import pl.jacpio.items.basic.HealPotion;
 import pl.jacpio.screens.GameScreen;
 import pl.jacpio.utilities.Assets;
@@ -40,7 +40,7 @@ public class Item {
         this.y = y;
         this.batch = batch;
         this.world = world;
-        size = scale * Constants.itemSize;
+        size = scale * Constants.ITEM_SIZE;
         this.id = id;
         setImage();
         setCollision();
@@ -52,7 +52,7 @@ public class Item {
     }
 
     public boolean isConsume() {
-        return this instanceof Eats || this instanceof HealPotion;
+        return this instanceof Foods || this instanceof HealPotion;
     }
 
     public final void setCollision() {
@@ -75,7 +75,7 @@ public class Item {
     }
 
     private void destroy() {
-        GameScreen.itemsSetter.removeItem(this);
+        GameScreen.assetsSetter.removeItem(this);
         GameScreen.addBodyToRemove(body);
     }
 
@@ -84,11 +84,11 @@ public class Item {
     }
 
     public final void setImage() {
-        int y = (int) Math.floor((double) id / Constants.itemImageRow);
-        int x = id - y * Constants.itemImageCol;
-        y *= Constants.itemSize;
-        x *= Constants.itemSize;
-        image = new TextureRegion(Assets.getTexture(Assets.allItems), x, y, Constants.itemSize, Constants.itemSize);
+        int y = (int) Math.floor((double) id / Constants.ITEM_IMAGE_ROW);
+        int x = id - y * Constants.ITEM_IMAGE_COL;
+        y *= Constants.ITEM_SIZE;
+        x *= Constants.ITEM_SIZE;
+        image = new TextureRegion(Assets.getTexture(Assets.ALL_ITEMS), x, y, Constants.ITEM_SIZE, Constants.ITEM_SIZE);
     }
 
     public final void render() {

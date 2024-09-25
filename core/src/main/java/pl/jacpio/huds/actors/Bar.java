@@ -17,7 +17,7 @@ public class Bar extends Actor {
 
     public Bar(float maxValue, float r, float g, float b) {
         this.maxValue = maxValue;
-        this.background = Assets.getTexture(Assets.barBackground);
+        this.background = Assets.getTexture(Assets.BAR_BACKGROUND);
         this.front = TextureOperation.createColorTexture(r,g,b,1);
         this.setSize(background.getWidth(), background.getHeight());
         if (maxValue <= 0) {

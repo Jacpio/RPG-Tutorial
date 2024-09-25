@@ -23,8 +23,8 @@ public class PlayerHUD extends Stage {
         manaBar.setPosition(25,100);
         manaBar.setValue(player.mana);
 
-        lifeIcon = new Image(Assets.getTexture(Assets.lifeIcon));
-        manaIcon = new Image(Assets.getTexture(Assets.manaIcon));
+        lifeIcon = new Image(Assets.getTexture(Assets.LIFE_ICON));
+        manaIcon = new Image(Assets.getTexture(Assets.MANA_ICON));
         lifeIcon.setScale(2.3f);
         manaIcon.setScale(2.3f);
         lifeIcon.setPosition( lifeBar.getWidth(), 25);
