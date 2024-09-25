@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": 0,
+      "message": "Witaj podróżniku!",
+      "options": [
+        {
+          "text": "Hej, witaj",
+          "nextID": 1
+        },
+        {
+          "text": "Co tam u Ciebie?",
+          "nextID": 2
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "message": "Miło Cię poznać, Cześć!",
+      "options": []
+    },
+    {
+      "id": 2,
+      "message": "Wszystko w porządku",
+      "options": [
+        {
+          "text": "To dobrze, więc żegnaj",
+          "nextID": 3
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "message": "Pa, Pa",
+      "options": []
+    }
+  ]
+}
